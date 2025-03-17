@@ -5,30 +5,11 @@ from auth import check_authentication
 st.set_page_config(page_title="POL - POD Finder", layout="wide")
 
 def identity_role(email):
-    commercial = [
-        "sales2@tradingsol.com", "sales1@tradingsol.com", "sales3@tradingsol.com",
-        "sales4@tradingsol.com", "sales@tradingsol.com", "sales5@tradingsol.com",
-        "bds@tradingsol.com", "insidesales@tradingsol.com"
-    ]
-    pricing = [
-        "pricing2@tradingsol.com", "pricing8@tradingsol.com",
-        "pricing6@tradingsol.com", "pricing10@tradingsol.com", "pricing11@tradingsol.com",
-        "customer9@tradingsol.com",
-    ]
-    ground = [
-        "ground@tradingsol.com", "customer5@tradingsol.com", "ground1@tradingsol.com"
-    ]
     admin = [
         "manager@tradingsol.com", "pricing10@tradingsol.com", "pricing2@tradingsol.com", "pricing@tradingsol.com"
     ]
 
-    if email in commercial:
-        return "commercial"
-    elif email in pricing:
-        return "pricing"
-    elif email in ground:
-        return "ground"
-    elif email in admin:
+    if email in admin:
         return "admin"
     else:
         return None
@@ -36,7 +17,7 @@ def identity_role(email):
 @st.dialog("Warning", width="large")
 def non_identiy():
     st.write("Dear user, it appears that you do not have an assigned role on the platform. This might restrict your access to certain features. Please contact the support team to have the appropriate role assigned. Thank you!")
-    st.write("datasupport@tradingsol.com")
+    st.write("pricing@tradingsol.com")
 
 col1, col2, col3 = st.columns([1, 2, 1])
 
