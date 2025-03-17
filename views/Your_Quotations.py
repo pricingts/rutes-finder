@@ -84,19 +84,9 @@ def show(role):
         request_df = pd.DataFrame()
         contracts_df = pd.DataFrame()
 
-    tabs = st.tabs(["All Quotations", "Quotations Requested"])
+    tabs = st.tabs(["Quotations Requested"])
 
     with tabs[0]:
-        col1, col2, col3 = st.columns([1,  1, 0.3])
-        with col1:
-            st.header("All Quotations")
-        with col3:
-            st.write(" ")
-            if st.button("Refresh Data", key="button_1"):
-                load_data_from_sheets.clear() 
-                st.rerun()
-
-    with tabs[1]:
 
         col1, col2, col3 = st.columns([1,  1, 0.3])
         with col1:
