@@ -201,7 +201,7 @@ def show(role):
             gb = GridOptionsBuilder.from_dataframe(df_filtered)
             visible_columns = ["REQUEST_ID", "CLIENT", "ROUTES_INFO", "INCOTERM", 
                             "COMMODITY", "TRANSPORT_TYPE", "MODALITY", 
-                            "TYPE_CONTAINER", "STATUS", "DESTINATION", "CUSTOMER"]
+                            "TYPE_CONTAINER", "STATUS", "DESTINATION", "CUSTOMER", "FEEDBACK"]
 
             for col in df_filtered.columns:
                 if col not in visible_columns:
