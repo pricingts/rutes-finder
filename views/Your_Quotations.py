@@ -78,8 +78,8 @@ def show(role):
         contracts_df = pd.DataFrame()
     elif role == "admin":
         request_df = load_data_from_sheets(quotations_requested, "All Quotes")
-        ground_df = load_data_from_sheets(quotations_requested, "Ground Quotations") #incluir cotizaciones de graound
-        contracts_df = load_data_from_sheets(quotations_contracts, "CONTRATOS")
+        #ground_df = load_data_from_sheets(quotations_requested, "Ground Quotations") #incluir cotizaciones de graound
+        #contracts_df = load_data_from_sheets(quotations_contracts, "CONTRATOS")
     else:
         request_df = pd.DataFrame()
         contracts_df = pd.DataFrame()
@@ -198,6 +198,9 @@ def show(role):
 
         # -------------------- DATAFRAME --------------------
         if not df_filtered.empty:
+            df_filtered['TIME'] = pd.to_datetime(df_filtered['TIME'], format='%d/%m/%Y %H:%M:%S')
+            df_filtered = df_filtered.sort_values(by='TIME', ascending=False)
+
             gb = GridOptionsBuilder.from_dataframe(df_filtered)
             visible_columns = ["REQUEST_ID", "CLIENT", "ROUTES_INFO", "INCOTERM", 
                             "COMMODITY", "TRANSPORT_TYPE", "MODALITY", 
