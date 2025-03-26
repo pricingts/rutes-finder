@@ -88,9 +88,20 @@ def show(role):
 
     with tabs[0]:
 
-        col1, col2, col3 = st.columns([1,  1, 0.3])
+        def clear_filters():
+            st.session_state["origen"] = []
+            st.session_state["destino"] = []
+            st.session_state["service"] = []
+            st.session_state["transport"] = []
+            st.session_state["cont_type"] = []
+            st.session_state["client"] = []
+
+        col1, col2, col3 = st.columns([1,  0.18, 0.18])
         with col1:
             st.header("Quotations Requested")
+        with col2:
+            st.write(" ")
+            st.button("Clear Filters", on_click=clear_filters)
         with col3:
             st.write(" ")
             if st.button("Refresh Data", key="button_2"):
@@ -118,6 +129,20 @@ def show(role):
                     return f"{row['TRANSPORT_TYPE']} - {row['MODALITY']}"
                 else:
                     return row['TRANSPORT_TYPE']
+            
+            if "origen" not in st.session_state:
+                st.session_state["origen"] = []
+            if "destino" not in st.session_state:
+                st.session_state["destino"] = []
+            if "service" not in st.session_state:
+                st.session_state["service"] = []
+            if "transport" not in st.session_state:
+                st.session_state["transport"] = []
+            if "cont_type" not in st.session_state:
+                st.session_state["cont_type"] = []
+            if "client" not in st.session_state:
+                st.session_state["client"] = []
+
 
             df_full[["origen", "destino"]] = df_full["ROUTES_INFO"].apply(
                 lambda x: pd.Series(extraer_origen_destino(x))
@@ -126,6 +151,9 @@ def show(role):
             df_full['TRANSPORT_COMBO'] = df_full.apply(combine_transport_modality, axis=1)
 
             df_filtered = df_full.copy()
+
+
+
             col1, col2, col3 = st.columns(3)
             col4, col5, col6 = st.columns(3)
 
@@ -148,7 +176,7 @@ def show(role):
 
             with col4:
                 transport_options = sorted(df_full['TRANSPORT_COMBO'].dropna().unique())
-                selected_transport = st.multiselect("**Transport/Modality**", transport_options)
+                selected_transport = st.multiselect("**Transport/Modality**", transport_options, key="transport")
 
             with col5: 
                 all_containers = set()
