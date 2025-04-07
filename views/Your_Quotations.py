@@ -152,8 +152,6 @@ def show(role):
 
             df_filtered = df_full.copy()
 
-
-
             col1, col2, col3 = st.columns(3)
             col4, col5, col6 = st.columns(3)
 
